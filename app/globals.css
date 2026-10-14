@@ -1,26 +1,60 @@
 @import "tailwindcss";
 
+@theme {
+  /* One accent: a deep evergreen that reads "established brokerage", not "startup". */
+  --color-brand-50: #f0f7f5;
+  --color-brand-100: #d9ece7;
+  --color-brand-200: #b4d9cf;
+  --color-brand-300: #86bfb0;
+  --color-brand-400: #57a08e;
+  --color-brand-500: #3a8473;
+  --color-brand-600: #2b6b5d;
+  --color-brand-700: #24574c;
+  --color-brand-800: #1f463e;
+  --color-brand-900: #1a3a34;
+
+  --color-canvas: #f7f6f3;
+  --color-ink: #1c1f23;
+  --color-muted: #5d636b;
+  --color-line: #e5e2dc;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif-display), ui-serif, Georgia, serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+/* Consistent focus ring for buttons and checkboxes (text fields use their own ring). */
+:where(button, input[type="checkbox"]):focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #eceae5 0px, #f5f4f1 160px, #eceae5 320px);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
 }
